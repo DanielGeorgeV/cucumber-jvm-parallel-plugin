@@ -5,13 +5,13 @@ import static java.lang.String.format;
 import com.github.timm.cucumber.generate.name.ClassNamingScheme;
 import com.github.timm.cucumber.runtime.TagPredicate;
 
-import gherkin.AstBuilder;
-import gherkin.Parser;
-import gherkin.TokenMatcher;
-import gherkin.ast.Feature;
-import gherkin.ast.GherkinDocument;
-import gherkin.pickles.Compiler;
-import gherkin.pickles.Pickle;
+import io.cucumber.core.gherkin.vintage.internal.gherkin.AstBuilder;
+import io.cucumber.core.gherkin.vintage.internal.gherkin.Parser;
+import io.cucumber.core.gherkin.vintage.internal.gherkin.TokenMatcher;
+import io.cucumber.core.gherkin.vintage.internal.gherkin.ast.Feature;
+import io.cucumber.core.gherkin.vintage.internal.gherkin.ast.GherkinDocument;
+import io.cucumber.core.gherkin.vintage.internal.gherkin.pickles.Compiler;
+import io.cucumber.core.gherkin.vintage.internal.gherkin.pickles.Pickle;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;

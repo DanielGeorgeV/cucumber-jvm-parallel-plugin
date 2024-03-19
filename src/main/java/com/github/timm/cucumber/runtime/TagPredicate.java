@@ -2,8 +2,8 @@ package com.github.timm.cucumber.runtime;
 
 import static java.util.Arrays.asList;
 
-import gherkin.events.PickleEvent;
-import gherkin.pickles.PickleTag;
+import io.cucumber.core.gherkin.vintage.internal.gherkin.pickles.PickleTag;
+import io.cucumber.core.gherkin.vintage.internal.gherkin.events.PickleEvent;
 
 import java.util.ArrayList;
 import java.util.Collection;

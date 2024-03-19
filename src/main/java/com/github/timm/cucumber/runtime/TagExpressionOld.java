@@ -1,6 +1,6 @@
 package com.github.timm.cucumber.runtime;
 
-import gherkin.pickles.PickleTag;
+import io.cucumber.core.gherkin.vintage.internal.gherkin.pickles.PickleTag;
 
 import java.util.ArrayList;
 import java.util.Collection;

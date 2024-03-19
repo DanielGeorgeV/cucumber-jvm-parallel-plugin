@@ -1,7 +1,7 @@
 package com.github.timm.cucumber.generate;
 
-import gherkin.ast.Location;
-import gherkin.ast.ScenarioDefinition;
+import io.cucumber.core.gherkin.vintage.internal.gherkin.ast.Location;
+import io.cucumber.core.gherkin.vintage.internal.gherkin.ast.ScenarioDefinition;
 
 /**
  * A single test to create within a test run.

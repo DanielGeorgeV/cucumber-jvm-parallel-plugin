@@ -1,10 +1,11 @@
 package com.github.timm.cucumber.runtime;
 
-import gherkin.events.PickleEvent;
-import gherkin.pickles.Pickle;
-import gherkin.pickles.PickleLocation;
-import gherkin.pickles.PickleStep;
-import gherkin.pickles.PickleTag;
+import io.cucumber.core.gherkin.vintage.internal.gherkin.events.PickleEvent;
+import io.cucumber.core.gherkin.vintage.internal.gherkin.pickles.Pickle;
+import io.cucumber.core.gherkin.vintage.internal.gherkin.pickles.PickleLocation;
+import io.cucumber.core.gherkin.vintage.internal.gherkin.pickles.PickleStep;
+import io.cucumber.core.gherkin.vintage.internal.gherkin.pickles.PickleTag;
+
 import org.junit.Test;
 
 import java.util.Collections;

@@ -49,6 +49,11 @@ under the License.
                         <enabled>true</enabled>
                     </snapshots>
                 </pluginRepository>
+                    <pluginRepository>
+                        <id>pcentral</id>
+                        <name>pcentral</name>
+                        <url>https://repo1.maven.org/maven2</url>
+                    </pluginRepository>
             </pluginRepositories>
         </profile>
     </profiles>
