@@ -5,8 +5,11 @@ package $packageName;
 #end##
 import org.junit.runner.RunWith;
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
@@ -15,7 +18,7 @@ import cucumber.api.junit.Cucumber;
         plugin = #stringArray($plugins),
         monochrome = $monochrome,
 #if(!$featureFile.contains(".feature:") && $tags)
-        tags = #stringArray($tags),
+tags = "not (@RemovedFunctionality or @Manual or @NotImplemented or @Draft or @ignore or @defectfixpending)",
 #end
         glue = #stringArray($glue))
 public class $className {

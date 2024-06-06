@@ -7,20 +7,20 @@
         <version>9</version>
     </parent>
 
-    <groupId>com.github.temyers</groupId>
+    <groupId>com.e2open-cucumber-parallel</groupId>
     <artifactId>cucumber-jvm-parallel-plugin</artifactId>
     <version>5.0.1-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>cucumber-jvm-parallel-plugin Maven Plugin</name>
 
-    <url>https://github.com/temyers/cucumber-jvm-parallel-plugin</url>
+<!--    <url>https://github.com/temyers/cucumber-jvm-parallel-plugin</url>-->
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <mavenVersion>3.2.5</mavenVersion>
-        <maven.compiler.source>10</maven.compiler.source>
-        <maven.compiler.target>10</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -58,11 +58,6 @@
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-core</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>io.cucumber</groupId>-->
-<!--            <artifactId>gherkin</artifactId>-->
-<!--            <version>5.0.0</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -73,8 +68,6 @@
             <artifactId>cucumber-core</artifactId>
             <version>5.5.0</version>
         </dependency>
-
-
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
@@ -107,11 +100,6 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.5</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>io.cucumber</groupId>-->
-<!--            <artifactId>tag-expressions</artifactId>-->
-<!--            <version>1.1.1</version>-->
-<!--        </dependency>-->
     </dependencies>
 
     <dependencyManagement>
@@ -155,7 +143,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
-                <version>3.4</version>
+                <version>3.5</version>
                 <configuration>
                     <goalPrefix>cucumber-jvm-parallel</goalPrefix>
                     <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
@@ -183,7 +171,8 @@
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>LATEST</version>
+<!--                        <version>6.11.2</version>-->
+                        <version>8.18</version>
                     </dependency>
                 </dependencies>
                 <configuration>
@@ -358,12 +347,12 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.3</version>
+                <version>3.0.5</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.6</version>
+                <version>3.21.2</version>
                 <configuration>
                     <excludes>
                         <!-- Ignore forked code -->
@@ -376,31 +365,31 @@
 
     <description>Plugin for assisting with running Cucumber-JVM features in parallel</description>
 
-    <developers>
-        <developer>
-            <name>Tim Myerscough</name>
-            <email>tm14258+mvn-central@gmail.com</email>
-            <organizationUrl>https://github.com/temyers</organizationUrl>
-            <roles>
-                <role>creator</role>
-            </roles>
-        </developer>
-    </developers>
+<!--    <developers>-->
+<!--        <developer>-->
+<!--            <name>Tim Myerscough</name>-->
+<!--            <email>tm14258+mvn-central@gmail.com</email>-->
+<!--            <organizationUrl>https://github.com/temyers</organizationUrl>-->
+<!--            <roles>-->
+<!--                <role>creator</role>-->
+<!--            </roles>-->
+<!--        </developer>-->
+<!--    </developers>-->
 
-    <inceptionYear>2015</inceptionYear>
+<!--    <inceptionYear>2015</inceptionYear>-->
 
-    <issueManagement>
-        <system>github</system>
-        <url>https://github.com/temyers/cucumber-jvm-parallel-plugin/issues</url>
-    </issueManagement>
+<!--    <issueManagement>-->
+<!--        <system>github</system>-->
+<!--        <url>https://github.com/temyers/cucumber-jvm-parallel-plugin/issues</url>-->
+<!--    </issueManagement>-->
 
-    <scm>
-        <connection>scm:git:https://github.com/temyers/cucumber-jvm-parallel-plugin.git</connection>
-        <developerConnection>scm:git:https://github.com/temyers/cucumber-jvm-parallel-plugin.git
-        </developerConnection>
-        <url>https://github.com/temyers/cucumber-jvm-parallel-plugin</url>
-        <tag>HEAD</tag>
-    </scm>
+<!--    <scm>-->
+<!--        <connection>scm:git:https://github.com/temyers/cucumber-jvm-parallel-plugin.git</connection>-->
+<!--        <developerConnection>scm:git:https://github.com/temyers/cucumber-jvm-parallel-plugin.git-->
+<!--        </developerConnection>-->
+<!--        <url>https://github.com/temyers/cucumber-jvm-parallel-plugin</url>-->
+<!--        <tag>HEAD</tag>-->
+<!--    </scm>-->
 
     <licenses>
         <license>

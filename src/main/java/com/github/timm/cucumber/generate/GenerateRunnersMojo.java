@@ -68,7 +68,7 @@ public class GenerateRunnersMojo extends AbstractMojo implements FileGeneratorCo
      * Location of the generated files.
      */
     @Parameter(defaultValue = "${project.build.directory}/generated-test-sources/cucumber",
-                    property = "outputDir", required = true)
+            property = "outputDir", required = true)
     private File outputDirectory;
 
     /**
@@ -78,12 +78,12 @@ public class GenerateRunnersMojo extends AbstractMojo implements FileGeneratorCo
             required = true)
     private File cucumberOutputDir;
 
-    /**
-     * Directory containing the feature files.
-     */
-    @Parameter(defaultValue = "src/test/resources/features/", property = "featuresDir",
-                    required = true)
-    private File featuresDirectory;
+    //    /**
+    //     * Directory containing the feature files.
+    //     */
+    //    @Parameter(defaultValue = "src/test/resources/features/", property = "featuresDir",
+    //                    required = true)
+    //    private File featuresDirectory;
 
     /**
      * see cucumber.api.CucumberOptions.strict
@@ -132,6 +132,12 @@ public class GenerateRunnersMojo extends AbstractMojo implements FileGeneratorCo
     private boolean monochrome;
 
     /**
+     * Directory containing the feature files.
+     */
+    @Parameter(property = "featuresDir", required = true)
+    private List<String> featuresDirectories;
+
+    /**
      * List of tags used to select scenarios to run. E.g. <pre>{@code
      *     <tags>
      *         <tag>@billing</tag>
@@ -176,6 +182,7 @@ public class GenerateRunnersMojo extends AbstractMojo implements FileGeneratorCo
      * <li><pre>{@code SCENARIO}</pre> - Generate one runner per scenario. A runner shall be created
      * for each example of a scenario outline</li>
      * </ul>
+     *
      * @see ParallelScheme
      */
     @Parameter(defaultValue = "FEATURE", property = "parallelScheme", required = true)
@@ -189,18 +196,20 @@ public class GenerateRunnersMojo extends AbstractMojo implements FileGeneratorCo
      */
     public void execute() throws MojoExecutionException {
 
-        if (!featuresDirectory.exists()) {
-            throw new MojoExecutionException("Features directory does not exist");
+        List<File> completeFeatureFiles = new ArrayList<>();
+        for (String directory : featuresDirectories) {
+            File featuresDirectory = new File(directory);
+            final Collection<File> featureFiles = listFiles(featuresDirectory, new String[]{"feature"}, true);
+            completeFeatureFiles.addAll(featureFiles);
         }
 
-        final Collection<File> featureFiles = listFiles(featuresDirectory, new String[] {"feature"}, true);
-        final List<File> sortedFeatureFiles = new NameFileComparator().sort(new ArrayList<File>(featureFiles));
+        final List<File> sortedFeatureFiles = new NameFileComparator().sort(new ArrayList<File>(completeFeatureFiles));
 
         createOutputDirIfRequired();
 
         File packageDirectory = packageName == null
                 ? outputDirectory
-                : new File(outputDirectory, packageName.replace('.','/'));
+                : new File(outputDirectory, packageName.replace('.', '/'));
 
         if (!packageDirectory.exists()) {
             packageDirectory.mkdirs();
@@ -210,19 +219,19 @@ public class GenerateRunnersMojo extends AbstractMojo implements FileGeneratorCo
         fileGenerator.generateCucumberITFiles(packageDirectory, sortedFeatureFiles);
 
         getLog().info("Adding " + outputDirectory.getAbsolutePath()
-                        + " to test-compile source root");
+                + " to test-compile source root");
 
         project.addTestCompileSourceRoot(outputDirectory.getAbsolutePath());
     }
 
     private CucumberITGenerator createFileGenerator() throws MojoExecutionException {
         final OverriddenCucumberOptionsParameters overriddenParameters =
-                        overrideParametersWithCucumberOptions();
+                overrideParametersWithCucumberOptions();
         final ClassNamingSchemeFactory factory = new ClassNamingSchemeFactory(new OneUpCounter());
         final ClassNamingScheme classNamingScheme = factory.create(namingScheme, namingPattern);
 
         return new CucumberITGeneratorFactory(this, overriddenParameters, classNamingScheme)
-                        .create(parallelScheme);
+                .create(parallelScheme);
     }
 
     private void createOutputDirIfRequired() {
@@ -239,22 +248,23 @@ public class GenerateRunnersMojo extends AbstractMojo implements FileGeneratorCo
 
         try {
             final OverriddenCucumberOptionsParameters overriddenParameters =
-                new OverriddenCucumberOptionsParameters()
-                    .setTags(tags)
-                    .setGlue(glue)
-                    .setStrict(strict)
-                    .setPlugins(parseFormatAndPlugins(format, plugins == null ? new ArrayList<Plugin>() : plugins))
-                    .setMonochrome(monochrome);
+                    new OverriddenCucumberOptionsParameters()
+                            .setTags(tags)
+                            .setGlue(glue)
+                            .setStrict(strict)
+                            .setPlugins(parseFormatAndPlugins(format,
+                                    plugins == null ? new ArrayList<Plugin>() : plugins))
+                            .setMonochrome(monochrome);
 
 
             if (cucumberOptions != null && cucumberOptions.length() > 0) {
                 final RuntimeOptions options = new RuntimeOptions(cucumberOptions);
                 overriddenParameters
-                    .overrideTags(options.getFilters())
-                    .overrideGlue(options.getGlue())
-                    .overridePlugins(parsePlugins(options.getPluginNames()))
-                    .overrideStrict(options.isStrict())
-                    .overrideMonochrome(options.isMonochrome());
+                        .overrideTags(options.getFilters())
+                        .overrideGlue(options.getGlue())
+                        .overridePlugins(parsePlugins(options.getPluginNames()))
+                        .overrideStrict(options.isStrict())
+                        .overrideMonochrome(options.isMonochrome());
             }
 
             return overriddenParameters;
@@ -271,10 +281,10 @@ public class GenerateRunnersMojo extends AbstractMojo implements FileGeneratorCo
                 plugins.add(createBuildInPlugin(pluginString));
             } catch (IllegalArgumentException e) {
                 throw new MojoExecutionException(this,
-                    "Invalid plugin in cucumber.options",
-                    "Cucumber options only supports build in plugins. "
-                    + "'" + pluginString + "' is not supported as a commandline option, "
-                    + "try it as a plugin in the pom?");
+                        "Invalid plugin in cucumber.options",
+                        "Cucumber options only supports build in plugins. "
+                                + "'" + pluginString + "' is not supported as a commandline option, "
+                                + "try it as a plugin in the pom?");
             }
         }
 
@@ -294,7 +304,7 @@ public class GenerateRunnersMojo extends AbstractMojo implements FileGeneratorCo
                     plugins.add(createBuildInPlugin(format));
                 } catch (IllegalArgumentException e) {
                     throw new MojoExecutionException("Format '" + format + "' is not supported as a "
-                        + "format, try it as a plugin?", e);
+                            + "format, try it as a plugin?", e);
                 }
             }
         }
